@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>دليل Gamma الذكي</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--p:#5b2a86;--p2:#7c4dbb;--bg:#f4f0ff;--bd:#dcd0f5;--bot:#f4f0ff;--user:#5b2a86;}
+*{box-sizing:border-box}
+body{margin:0;font-family:'Cairo',Tahoma,Arial,sans-serif;background:#faf8ff;color:#2b2140;line-height:1.8}
+.wrap{max-width:900px;margin:0 auto;padding:12px;min-height:100vh;display:flex;flex-direction:column}
+header{background:linear-gradient(135deg,#5b2a86,#7c4dbb);color:#fff;border-radius:18px;padding:18px 20px;text-align:center;box-shadow:0 4px 14px rgba(91,42,134,.25)}
+header h1{margin:0;font-size:1.35rem;line-height:1.6}
+.notes{background:#fff;border:2px solid var(--bd);border-radius:16px;padding:14px 18px;margin:12px 0;font-size:.96rem}
+.notes p{margin:4px 0}
+.notes ul{margin:6px 0;padding-inline-start:22px}
+.notes .start{background:var(--bg);border:1px dashed var(--p2);border-radius:10px;padding:6px 12px;font-weight:700;color:var(--p);display:inline-block;margin:6px 0}
+#chat{flex:1;min-height:260px;max-height:55vh;overflow-y:auto;background:#fff;border:2px solid var(--bd);border-radius:16px;padding:14px;display:flex;flex-direction:column;gap:10px}
+.msg{max-width:92%;padding:10px 14px;border-radius:16px;word-wrap:break-word}
+.msg.bot{background:var(--bot);border:1px solid var(--bd);align-self:flex-start;border-top-right-radius:4px;color:#2b2140}
+.msg.user{background:var(--user);color:#fff;align-self:flex-end;border-top-left-radius:4px}
+.msg ol,.msg ul{margin:6px 0;padding-inline-start:22px}
+.msg b{color:var(--p)}
+.vids{margin-top:8px;display:flex;flex-direction:column;gap:8px}
+.vid a.vl{display:inline-block;color:#fff;background:var(--p);padding:4px 12px;border-radius:20px;text-decoration:none;font-size:.9rem}
+.vid .ext{font-size:.8rem;margin-inline-start:8px;color:var(--p2)}
+.vid .url{display:block;direction:ltr;text-align:left;font-size:.8rem;color:#6a5a8a;word-break:break-all}
+.vid iframe{width:100%;aspect-ratio:16/9;border:0;border-radius:12px;margin-top:6px}
+.spk{margin-top:6px;border:1px solid var(--bd);background:#fff;color:var(--p);border-radius:20px;padding:2px 12px;cursor:pointer;font-family:inherit;font-size:.85rem}
+.typing{opacity:.7}
+form{display:flex;gap:8px;margin-top:10px}
+#inp{flex:1;border:2px solid var(--bd);border-radius:14px;padding:12px 14px;font-family:inherit;font-size:1rem;outline:none;background:#fff}
+#inp:focus{border-color:var(--p2)}
+#send{background:var(--p);color:#fff;border:0;border-radius:14px;padding:0 22px;font-family:inherit;font-size:1rem;cursor:pointer;font-weight:700}
+#send:hover{background:var(--p2)}
+.clear{text-align:left;margin:10px 4px 0}
+.clear a{color:#666;text-decoration:underline;cursor:pointer;font-size:.9rem}
+.audio{border-top:1px dotted #bbb;margin-top:8px;padding-top:10px;display:flex;flex-wrap:wrap;gap:10px 14px;align-items:center;font-size:.9rem;color:#444}
+.audio select{border:1px solid #ccc;border-radius:10px;padding:5px 10px;font-family:inherit;background:#fff;font-size:.9rem}
+.audio .lab{display:flex;align-items:center;gap:6px}
+.audio input[type=checkbox]{width:18px;height:18px}
+.hint{font-size:.78rem;color:#777;margin-top:6px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header><h1>دليل Gamma الذكي: صمّم عرضك التقديمي بالذكاء الاصطناعي في دقائق</h1></header>
+
+  <div class="notes">
+    <p>أنا مساعدكم الذكي لمنصة Gamma، وسأساعدكم على تعلّم استخدام المنصة لتصميم عروض تقديمية مميزة بسهولة باستخدام الذكاء الاصطناعي. ✨</p>
+    <p class="start">📝 للبدء : اكتب اسمك ثلاثي</p>
+    <p><b>💬 كيف تطرح سؤالك؟</b><br>بعد كتابة اسمك، اكتب سؤالك في مربع المحادثة واضغط على زر الإرسال. يمكنك أن تسألني مباشرة، مثل:</p>
+    <ul>
+      <li>ما منصة Gamma؟ وما أهم مميزاتها؟</li>
+      <li>كيف أنشئ حسابًا مجانيًا؟</li>
+      <li>كيف أنشئ عرضًا تقديميًا وأعدّله؟</li>
+      <li>كيف أضيف الصور والجداول إلى العرض؟</li>
+      <li>كيف أشارك العرض أو أصدّره؟</li>
+    </ul>
+    <p>يمكنك أيضًا طرح سؤال عن خطوة لم تفهمها، أو طلب شرحها بطريقة أبسط، أو توضيح الخطوات بالترتيب.</p>
+    <p>📚 <b>مهم:</b> سأجيب عن أسئلتك اعتمادًا على المادة التعليمية المرفوعة فقط، وسأرشدك خطوة بخطوة.</p>
+    <p>🚀 هيا نبدأ رحلتنا في تصميم عروض تقديمية مميزة!</p>
+  </div>
+
+  <div id="chat" aria-live="polite"></div>
+
+  <form id="form" autocomplete="off">
+    <input id="inp" type="text" placeholder="للبدء : اكتب اسمك ثلاثي" aria-label="مربع الكتابة">
+    <button id="send" type="submit">إرسال</button>
+  </form>
+
+  <div class="clear"><a id="clr">مسح المحادثة</a></div>
+
+  <div class="audio">
+    <span class="lab">🔊 الصوت:</span>
+    <label class="lab">السرعة
+      <select id="rate">
+        <option value="0.82">بطيئة</option>
+        <option value="0.95" selected>عادية</option>
+        <option value="1.12">سريعة</option>
+      </select>
+    </label>
+    <label class="lab">الصوت
+      <select id="gender">
+        <option value="f" selected>أنثى</option>
+        <option value="m">ذكر</option>
+      </select>
+    </label>
+    <label class="lab"><input type="checkbox" id="auto"> قراءة تلقائية للإجابات</label>
+  </div>
+  <div class="hint">لأفضل جودة صوت طبيعية يُفضّل استخدام متصفح Microsoft Edge أو Google Chrome.</div>
+</div>
+
+<script>
+/* ============ الإعدادات ============ */
+const SHEET_URL = "https://script.google.com/macros/s/AKfycbzYGEj7YizLacMNn2cbLooyOBt0x5pVSPkFkI41sDQCFVtGCxMk12e1T5YNBgqe2Nc-4Q/exec";
+
+/* ============ قاعدة المعرفة (من المادة التعليمية فقط) ============ */
+const V = {
+  account:{id:"kDtWylNBthY",t:"إنشاء حساب مجاني على منصة Gamma"},
+  topic:{id:"aXd7FXx3wbo",t:"إنشاء عرض تقديمي من خلال كتابة الأمر في مربع الكتابة"},
+  file:{id:"VkvFC4tFGI4",t:"إنشاء عرض تقديمي من خلال رفع ملف من جهاز الكمبيوتر"},
+  outline:{id:"hTN_SXA6bzo",t:"مراجعة مخطط العرض وتوليد العرض"},
+  edit:{id:"GrMaTHIMy9w",t:"تغيير اسم العرض وتعديل النص داخل الشريحة"},
+  addslide:{id:"4ouv2-xwee0",t:"إضافة شريحة جديدة إلى العرض"},
+  layout:{id:"OC5ef9KR6lU",t:"تغيير تخطيط الشريحة (Layout)"},
+  image:{id:"ECsNyuwjHMU",t:"تغيير الصورة في الشريحة أو إدراج صورة جديدة"},
+  table:{id:"aoE9TjfyaR4",t:"إدراج جدول داخل الشريحة"},
+  yt:{id:"i2b2hHk0mqM",t:"إدراج فيديو داخل الشريحة"},
+  present:{id:"jijwLJBRNx0",t:"مشاهدة العرض النهائي"},
+  share:{id:"LwkQO26B4BU",t:"مشاركة العرض مع الآخرين"},
+  pdf:{id:"aZJE3-spJsg",t:"تصدير العرض كملف PDF"},
+  ppt:{id:"QyZhISeCqFE",t:"تصدير العرض كملف PowerPoint"},
+  gs:{id:"OMXEGH0Fvus",t:"فتح العرض في Google Slides"}
+};
+
+const KB = [
+{id:"intro",
+ kw:["ما منصه","ما هي","ما هو","gamma","جاما","تعريف","مميزات","ميزات","فوائد","اهميه","ايه هي","ايه هو","ماذا تفعل","ما فايده","لماذا","عن المنصه","شرح المنصه"],
+ html:`<b>منصة Gamma</b> بيئة سحابية قائمة على تطبيقات الذكاء الاصطناعي التوليدي (Generative AI) مخصصة لتصميم وإنشاء العروض التقديمية الرقمية التفاعلية. تعتمد على تقنيات معالجة اللغة الطبيعية (NLP) لتحويل النصوص والأفكار والمخططات الأولية فورًا إلى شرائح وبطاقات بصرية منقحة ومتكاملة، وتعمل عبر المتصفح.
+ <br><b>أهم مميزاتها:</b>
+ <ol>
+ <li><b>السرعة وتوفير الوقت والجهد:</b> تحوّل المنصة الموضوع المكتوب إلى عرض كامل في ثوانٍ، فيتفرغ الطالب لمراجعة المحتوى وتطويره بدل قضاء ساعات في التنسيق.</li>
+ <li><b>الإنتاج داخل منصة واحدة:</b> تتولى المنصة كتابة المحتوى واختيار التصميم والصور معًا.</li>
+ <li><b>التخطيط المسبق للعرض:</b> تعرض المنصة قبل التوليد مخططًا بعناوين الشرائح يمكنك تعديله وإعادة ترتيبه.</li>
+ <li><b>سهولة الاستخدام:</b> واجهة بسيطة لا تحتاج إلى خبرة سابقة في التصميم.</li>
+ <li><b>التصميم الاحترافي الجاهز:</b> قوالب وتخطيطات ذكية تتكيف مع محتوى كل شريحة وتظهر العرض متناسقًا في الألوان والخطوط.</li>
+ <li><b>تنوع مصادر الإنشاء:</b> من موضوع (Generate)، أو من نص جاهز (Paste text in)، أو من ملف مستورد (Import).</li>
+ <li><b>تنوع عناصر الوسائط المتعددة:</b> إدراج الصور والجداول والفيديو وتوليد الصور بالذكاء الاصطناعي.</li>
+ <li><b>سهولة التعديل والتحسين:</b> تعديل النص والصور والتخطيط يدويًا، أو الطلب من الذكاء الاصطناعي تلخيص النص وتبسيطه وتحسين صياغته.</li>
+ <li><b>دعم اللغة العربية:</b> يمكن إنشاء العروض بالعربية مع الكتابة من اليمين إلى اليسار.</li>
+ <li><b>سهولة المشاركة والتصدير:</b> مشاركة العرض برابط أو تصديره إلى PDF و PowerPoint و Google Slides.</li>
+ </ol>`,
+ simple:`Gamma منصة تعمل من المتصفح، تكتب لها موضوعًا فتصنع لك عرضًا تقديميًا كاملًا بالذكاء الاصطناعي: محتوى وتصميم وصور. ثم تعدّله وتشاركه أو تصدّره.`},
+
+{id:"overview",
+ kw:["بالترتيب","الخطوات كلها","كل الخطوات","ملخص","مراحل","خطوات استخدام","خطوات العمل","من البدايه","من الصفر","ابدا من","خريطه","اول خطوه","الخطوات بالترتيب"],
+ html:`<b>خطوات تصميم عرض تقديمي بمنصة Gamma بالترتيب:</b>
+ <ol>
+ <li><b>إنشاء حساب مجاني</b> على المنصة باستخدام حساب Gmail.</li>
+ <li><b>إنشاء العرض بالذكاء الاصطناعي</b> من موضوع محدد (Generate) أو من نص جاهز أو من ملف، ثم مراجعة المخطط (Outline) والضغط على Generate.</li>
+ <li><b>تعديل العرض التقديمي:</b> تغيير الاسم وتعديل النص والصور والتخطيط وإضافة شرائح وجداول وفيديو.</li>
+ <li><b>مشاهدة العرض ومشاركته وتصديره</b> إلى PDF أو PowerPoint أو Google Slides.</li>
+ </ol>
+ يمكنك سؤالي عن أي خطوة وسأشرحها بالتفصيل مع فيديو توضيحي.`,
+ simple:`أربع خطوات فقط: (1) سجّل حسابًا مجانيًا. (2) اكتب موضوعك ودع الذكاء الاصطناعي ينشئ العرض. (3) عدّل ما تريد. (4) شاهد العرض وشاركه أو صدّره.`},
+
+{id:"account",
+ kw:["حساب","تسجيل","سجل","انشاء حساب","انشي حساب","فتح حساب","gmail","جيميل","free","start for free","دخول","ادخل","موقع المنصه","افتح الموقع","app.gamma","chrome","كروم","كلمه المرور"],
+ html:`<b>إنشاء حساب مجاني على Gamma:</b>
+ <ol>
+ <li>افتح متصفح <b>Chrome</b>، واكتب في شريط العنوان <b>app.gamma</b> ثم اضغط Enter. تظهر الصفحة الرئيسية وبها زر <b>free for start</b>.</li>
+ <li>اضغط على زر <b>start for free</b> فتظهر نافذة اختيار طريقة التسجيل. اختر <b>Continue with Google</b> للتسجيل بحساب Gmail وكلمة المرور، ثم اضغط على اسم حسابك لتأكيد الدخول.</li>
+ <li>إذا طُلب منك ذلك، اكتب اسمك واختر نوع استخدامك للمنصة (مثل التعليم). عند الانتهاء تظهر الصفحة الرئيسية لحسابك، وتبدأ الخطة المجانية تلقائيًا بـ 400 نقطة دون إدخال أي بيانات دفع.</li>
+ </ol>`,
+ simple:`افتح app.gamma في Chrome ← اضغط start for free ← اختر Continue with Google ← اختر حساب Gmail ← اكتب اسمك واختر "التعليم". بعدها تحصل على 400 نقطة مجانًا.`,
+ vids:[V.account]},
+
+{id:"credits",
+ kw:["نقاط","نقطه","رصيد","400","تكلفه","تكلف","يكلف","credit","credits","كم عرض","10 عروض","الخطه المجانيه","استهلاك","تخصم","خصم","ينتهي"],
+ html:`<b>نقاط الخطة المجانية:</b>
+ <ul>
+ <li>تمنحك الخطة المجانية نحو <b>400 نقطة لمرة واحدة</b>، تكفي لنحو <b>10 عروض</b>.</li>
+ <li>توليد العرض بالضغط على Generate يخصم نحو <b>40 نقطة</b> من رصيدك.</li>
+ <li>توليد صورة بالذكاء الاصطناعي يخصم <b>10 نقاط</b>.</li>
+ <li>تعديل الشريحة بالذكاء الاصطناعي (Edit with AI) يخصم نحو <b>10 نقاط</b> لكل طلب، فاستخدمه عند الحاجة.</li>
+ <li>التعديل اليدوي (الكتابة وتنسيق الخط والتخطيط ورفع صورة من جهازك) <b>لا يستهلك نقاط</b>.</li>
+ <li>تعديل المخطط (Outline) قبل التوليد <b>مجاني</b> ويوفر النقاط.</li>
+ </ul>`,
+ simple:`رصيدك المجاني 400 نقطة تكفي نحو 10 عروض. كل عرض يخصم 40 نقطة، وكل صورة ذكاء اصطناعي 10 نقاط، وكل تعديل بالذكاء الاصطناعي 10 نقاط. التعديل اليدوي مجاني.`},
+
+{id:"sources",
+ kw:["مصادر الانشاء","طرق انشاء","طرق الانشاء","paste text","نص جاهز","الصق نص","لصق نص","ثلاث طرق","اكثر من طريقه","كيف انشئ عرض بطرق"],
+ html:`<b>مصادر إنشاء العرض في Gamma:</b>
+ <ul>
+ <li><b>من موضوع (Generate):</b> تكتب الموضوع في مربع الكتابة.</li>
+ <li><b>من نص جاهز (Paste text in):</b> تنسخ نصًا مكتوبًا مسبقًا وتضعه في المنصة.</li>
+ <li><b>من ملف (Import):</b> ترفع ملفًا من جهاز الكمبيوتر أو الموبايل ليتم تحويله إلى عرض.</li>
+ </ul>
+ اسألني عن "إنشاء عرض من موضوع" أو "إنشاء عرض من ملف" لأشرح لك الخطوات مع الفيديو.`,
+ vids:[V.topic,V.file]},
+
+{id:"topic",
+ kw:["من موضوع","موضوع","generate","مربع الكتابه","اكتب الموضوع","انشاء عرض","انشي عرض","انشاء العرض","انشي العرض","عرض جديد","new presentation","create","توليد العرض","ولد","الفئه المستهدفه","الامر","prompt","خطوات انشاء"],
+ html:`<b>إنشاء عرض تقديمي جديد من موضوع محدد (Generate):</b>
+ <ol>
+ <li>من الصفحة الرئيسية اضغط على زر <b>Create new</b> (أو <b>+ New</b>)، ثم اختر <b>Presentation</b> من القائمة التي تظهر.</li>
+ <li>اضغط داخل مربع الكتابة واكتب موضوع العرض بوضوح مع ذكر الفئة المستهدفة، مثل: <b>دورة حياة الفراشة لتلاميذ الصف الرابع الابتدائي</b>.</li>
+ <li>اضغط على <b>Generate outline</b> ليكتب الذكاء الاصطناعي مخططًا بعناوين الشرائح.</li>
+ <li>من قائمة القوالب اضغط على القالب المناسب لتجربته، ويُفضّل اختيار قالب بخلفية فاتحة.</li>
+ </ol>
+ بعد ذلك راجع المخطط واضغط Generate لتوليد العرض.`,
+ simple:`اضغط Create new ← Presentation ← اكتب موضوعك والفئة المستهدفة ← Generate outline ← اختر قالبًا بخلفية فاتحة.`,
+ vids:[V.topic]},
+
+{id:"file",
+ kw:["ملف","رفع","upload","files","import","استيراد","من ملف","حول ملف","تحويل ملف","ارفع","word","pdf للتحويل"],
+ html:`<b>إنشاء عرض تقديمي من خلال رفع ملف:</b>
+ <ol>
+ <li>اضغط على علامة <b>+</b> (Upload files) واختر الملف المطلوب من جهاز الكمبيوتر أو الموبايل الخاص بك.</li>
+ <li>اضغط على <b>Generate outline</b> ليقوم الذكاء الاصطناعي بتحويل الملف إلى مخطط بعناوين الشرائح.</li>
+ <li>من قائمة القوالب اضغط على القالب المناسب لتجربته، ويُفضّل اختيار قالب بخلفية فاتحة.</li>
+ </ol>`,
+ simple:`اضغط علامة + ← اختر الملف من جهازك ← Generate outline ← اختر قالبًا فاتحًا.`,
+ vids:[V.file]},
+
+{id:"outline",
+ kw:["مخطط","outline","راجع","مراجعه","عناوين الشرائح","اسحب","ترتيب الشرائح","اعادة ترتيب","بطاقات","cards","شاهد العرض الناتج","يتم التوليد","generate بعد","خصم 40"],
+ html:`<b>مراجعة مخطط العرض وتوليده:</b>
+ <ol>
+ <li><b>راجع المخطط (Outline):</b> تظهر عناوين الشرائح. اضغط على أي عنوان لتعديله، واضغط على علامة <b>+</b> لإضافة عنوان جديد، واسحب العنوان بالماوس لتغيير ترتيب الشريحة. تعديل المخطط هنا مجاني ويوفر النقاط قبل التوليد.</li>
+ <li><b>ولّد العرض:</b> اضغط على زر <b>Generate</b>. بعد عدة ثوانٍ يظهر العرض كاملًا، ويتم خصم نحو 40 نقطة من رصيدك.</li>
+ <li><b>شاهد العرض الناتج:</b> يظهر العرض في شكل شرائح (تسمى بطاقات cards) بنص وتصميم وصور لكل شريحة. تنقّل بين الشرائح من الشريط الجانبي لتتعرف على ما أنتجته المنصة قبل البدء في التعديل.</li>
+ </ol>`,
+ simple:`عدّل عناوين الشرائح أو أضف أو رتّب بالسحب (مجانًا) ← اضغط Generate ← شاهد البطاقات من الشريط الجانبي.`,
+ vids:[V.outline]},
+
+{id:"edit",
+ kw:["تعديل النص","تغيير اسم","اسم العرض","غير الاسم","عدل النص","خط","حجم الخط","font","نوع الخط","كتابه وتنسيق","تنسيق","صحح","تصحيح","عدل","تعديل العرض","اعدل","تحرير"],
+ html:`<b>تغيير اسم العرض وتعديل النص:</b>
+ <ol>
+ <li><b>تغيير اسم العرض:</b> اضغط مرة واحدة على عنوان العرض أعلى الصفحة واكتب الاسم الجديد، وليكن مثلًا: عرض تقديمي رقم (1).</li>
+ <li><b>تعديل النص داخل الشريحة (كتابة وتنسيق):</b> اضغط على النص المراد تعديله داخل الشريحة ليظهر مؤشر الكتابة، ثم اكتب النص الجديد أو صحح الكلمات بلوحة المفاتيح. التعديل اليدوي لا يستهلك نقاطًا.</li>
+ <li><b>تنسيق الخط:</b> حدد النص فيظهر شريط أدوات فوقه. اضغط على الرقم المكتوب عند حجم الخط لاختيار الحجم المناسب، واضغط على اسم الخط (Font) لاختيار نوع الخط المناسب.</li>
+ </ol>`,
+ simple:`اضغط على العنوان أعلى الصفحة لتغيير الاسم. اضغط على أي نص لتعديله. حدد النص ليظهر شريط الأدوات واختر حجم الخط ونوعه. كل هذا مجاني.`,
+ vids:[V.edit]},
+
+{id:"addslide",
+ kw:["اضافه شريحه","اضيف شريحه","شريحه جديده","شريحه فارغه","blank","بطاقه جديده","اضف شريحه","شريحه اضافيه","slide جديد","زياده شريحه"],
+ html:`<b>إضافة شريحة جديدة:</b>
+ اضغط على علامة <b>+</b> الظاهرة أسفل الشريحة أو بين شريحتين، ثم اختر <b>Blank card</b> لشريحة فارغة، أو اختر تصميمًا جاهزًا من القوالب.`,
+ simple:`اضغط علامة + أسفل الشريحة ← اختر Blank card أو تصميمًا جاهزًا.`,
+ vids:[V.addslide]},
+
+{id:"layout",
+ kw:["تخطيط","layout","اعمده","عمود","اغير شكل الشريحه","تغيير شكل","تقسيم الشريحه","توزيع"],
+ html:`<b>تغيير تخطيط الشريحة (Layout):</b>
+ من شريط الأدوات حدد الأيقونة أو القائمة <b>Layout</b>، ثم اختر التخطيط المناسب مثل <b>أعمدة</b> أو غيره من التخطيطات المعروضة بأيقونات.`,
+ simple:`في شريط الأدوات اضغط Layout واختر الشكل المناسب مثل الأعمدة.`,
+ vids:[V.layout]},
+
+{id:"imgchange",
+ kw:["تغيير الصوره","غير الصوره","استبدال","replace","replace image","web search","ابحث عن صوره","بحث صوره","صوره بالذكاء","توليد صوره","ai generate","ولد صوره","الصور","صور","صوره"],
+ html:`<b>تغيير الصورة داخل الشريحة:</b>
+ <ol>
+ <li>اضغط على الصورة لتحديدها، ثم اضغط على <b>Replace image</b>.</li>
+ <li>اختر إحدى الطرق:
+  <ul>
+   <li><b>Upload</b> لرفع صورة من جهازك (مجاني).</li>
+   <li><b>Web search</b> للبحث عن صورة من الإنترنت.</li>
+   <li><b>AI generate</b> لتوليد صورة بالذكاء الاصطناعي (تخصم 10 نقاط).</li>
+  </ul>
+ </li>
+ </ol>`,
+ simple:`اضغط على الصورة ← Replace image ← اختر Upload أو Web search أو AI generate (هذه تخصم 10 نقاط).`,
+ vids:[V.image]},
+
+{id:"imginsert",
+ kw:["ادراج صوره","ادرج صوره","اضافه صوره","اضيف صوره","صوره من الجهاز","صوره من الكمبيوتر","صوره من الحاسوب","صوره جديده","insert image","اضيف الصور","الصور","صور","صوره","اضافه صور"],
+ html:`<b>إدراج صورة من جهاز الحاسوب:</b>
+ <ol>
+ <li>اضغط على علامة <b>+</b> داخل الشريحة واختر <b>Image</b>.</li>
+ <li>اختر <b>Upload</b>، ومن نافذة الملفات اختر الصورة المناسبة واضغط <b>open</b>.</li>
+ <li>تحكم في حجم الصورة من النقاط الظاهرة على حوافها.</li>
+ </ol>`,
+ simple:`اضغط + داخل الشريحة ← Image ← Upload ← اختر الصورة ← open. غيّر حجمها من النقاط على حوافها.`,
+ vids:[V.image]},
+
+{id:"table",
+ kw:["جدول","جداول","table","blocks","add blocks","صفوف","خليه","ادراج جدول","اضافه جدول"],
+ html:`<b>إدراج جدول داخل الشريحة:</b>
+ <ol>
+ <li>اضغط على <b>add blocks</b> (أو blocks)، ثم اختر <b>الجدول</b>، وليكن مثلًا 3 أعمدة و3 صفوف.</li>
+ <li>اضغط داخل الخلية واكتب النص المطلوب.</li>
+ </ol>`,
+ simple:`اضغط add blocks ← اختر الجدول (مثلًا 3×3) ← اضغط داخل أي خلية واكتب.`,
+ vids:[V.table]},
+
+{id:"youtube",
+ kw:["فيديو","youtube","يوتيوب","ادراج فيديو","اضافه فيديو","video","رابط الفيديو","اضيف فيديو"],
+ html:`<b>إدراج فيديو من YouTube داخل الشريحة:</b>
+ <ol>
+ <li>اضغط على <b>add blocks</b> ثم اختر <b>Video</b>.</li>
+ <li>اختر <b>YouTube</b> والصق رابط الفيديو أو ابحث عنه.</li>
+ <li>اضغط <b>Insert</b> ليظهر الفيديو داخل الشريحة.</li>
+ </ol>`,
+ simple:`add blocks ← Video ← YouTube ← الصق الرابط أو ابحث ← Insert.`,
+ vids:[V.yt]},
+
+{id:"ai",
+ kw:["edit with ai","تعديل بالذكاء","اختصر","اختصار","تلخيص","لخص","تبسيط النص","حسن الصياغه","تحسين الصياغه","accept","discard","شاره","10 نقاط","ذكاء اصطناعي للتعديل","اطلب من الذكاء"],
+ html:`<b>تعديل الشريحة بالذكاء الاصطناعي (Edit with AI):</b>
+ <ol>
+ <li>اضغط على أيقونة <b>Edit with AI</b> (الشارة) داخل الشريحة.</li>
+ <li>اكتب طلبًا بسيطًا، مثل: <b>اختصر النص</b>، ثم اضغط إرسال وراجع الاقتراح.</li>
+ <li>اضغط <b>Accept</b> لقبول التعديل أو <b>Discard</b> لإلغائه.</li>
+ </ol>
+ تنبيه: كل طلب يستهلك نحو <b>10 نقاط</b>، فاستخدمه عند الحاجة.`,
+ simple:`اضغط أيقونة Edit with AI ← اكتب طلبك (مثل: اختصر النص) ← أرسل ← Accept أو Discard. كل طلب يخصم 10 نقاط.`},
+
+{id:"present",
+ kw:["present","شاهد العرض","مشاهده العرض","تشغيل العرض","عرض بملء الشاشه","ملء الشاشه","esc","عرض العرض","اعرض","استعراض","العرض النهائي"],
+ html:`<b>مشاهدة العرض النهائي:</b>
+ اضغط على زر <b>Present</b> لتشغيل العرض بملء الشاشة، وتنقّل بين الشرائح بالأسهم، واخرج بالضغط على <b>Esc</b>.`,
+ simple:`اضغط Present ← تنقّل بالأسهم ← اضغط Esc للخروج.`,
+ vids:[V.present]},
+
+{id:"share",
+ kw:["مشاركه","شارك","share","رابط العرض","copy link","anyone with the link","ارسل الرابط","made with gamma","علامه","لينك العرض","ارسال العرض"],
+ html:`<b>مشاركة العرض برابط:</b>
+ <ol>
+ <li>اضغط على <b>Share</b>.</li>
+ <li>اختر <b>Anyone with the link</b> ثم <b>View</b> (للمشاهدة فقط)، ثم اضغط <b>Copy link</b> وأرسل الرابط للآخرين.</li>
+ </ol>
+ ملاحظة: تظهر علامة <b>Made with Gamma</b> في الرابط المشارك في النسخة المجانية.`,
+ simple:`Share ← Anyone with the link ← View ← Copy link ثم أرسل الرابط. ستظهر علامة Made with Gamma في النسخة المجانية.`,
+ vids:[V.share]},
+
+{id:"export",
+ kw:["تصدير","اصدر","صدر","تحميل","تنزيل","حفظ العرض","احفظ","export","download","طريقه حفظ","ملف للتسليم","تسليم"],
+ html:`<b>تصدير العرض التقديمي:</b>
+ اضغط على قائمة الثلاث نقاط (<b>⋯</b>) ثم <b>Export</b>، واختر الصيغة المناسبة:
+ <ul>
+ <li><b>Export to PDF</b> لتصدير ملف PDF.</li>
+ <li><b>Export to PowerPoint</b> لتصدير ملف PowerPoint.</li>
+ <li><b>Export to Google Slides</b> لفتح العرض في Google Slides.</li>
+ </ul>
+ اسألني عن أي صيغة بالاسم لأشرح لك خطواتها بالتفصيل.`,
+ vids:[V.pdf,V.ppt,V.gs]},
+
+{id:"pdf",
+ kw:["pdf","بي دي اف","بدف"],
+ html:`<b>تصدير العرض كملف PDF:</b>
+ <ol>
+ <li>اضغط على قائمة الثلاث نقاط (<b>⋯</b>) ثم <b>Export</b>.</li>
+ <li>اختر <b>Export to PDF</b>، وانتظر تجهيز الملف ثم اضغط <b>Download</b>.</li>
+ <li>يُحفظ الملف في مجلد التنزيلات (Downloads) بجهازك.</li>
+ </ol>`,
+ simple:`⋯ ← Export ← Export to PDF ← Download. يُحفظ الملف في مجلد التنزيلات.`,
+ vids:[V.pdf]},
+
+{id:"ppt",
+ kw:["powerpoint","بوربوينت","باوربوينت","بور بوينت","pptx","ppt"],
+ html:`<b>تصدير العرض كملف PowerPoint:</b>
+ من قائمة <b>Export</b> اختر <b>Export to PowerPoint</b> ثم اضغط <b>Download</b>.`,
+ simple:`⋯ ← Export ← Export to PowerPoint ← Download.`,
+ vids:[V.ppt]},
+
+{id:"gs",
+ kw:["google slides","جوجل سلايد","جوجل سلايدز","slides","سلايدز"],
+ html:`<b>فتح العرض في Google Slides:</b>
+ <ol>
+ <li>من قائمة <b>Export</b> اختر <b>Export to Google Slides</b>.</li>
+ <li>إن ظهر الخيار، اضغط على السماح لربط حسابك.</li>
+ <li>يُفتح العرض داخل Google Slides للتعديل.</li>
+ </ol>`,
+ simple:`Export ← Export to Google Slides ← اسمح بربط الحساب ← يفتح العرض للتعديل.`,
+ vids:[V.gs]},
+
+{id:"arabic",
+ kw:["عربي","عربيه","اللغه العربيه","العربيه","يمين","arabic","rtl"],
+ html:`<b>دعم اللغة العربية:</b> يمكن إنشاء العروض في Gamma باللغة العربية مع الكتابة من اليمين إلى اليسار.`,
+ simple:`نعم، Gamma تدعم العربية والكتابة من اليمين إلى اليسار.`}
+];
+
+/* ============ أدوات البحث ============ */
+function norm(s){
+  return (s||"").toLowerCase()
+    .replace(/[\u064B-\u065F\u0670\u0640]/g,"")
+    .replace(/[أإآٱ]/g,"ا").replace(/ى/g,"ي").replace(/ة/g,"ه")
+    .replace(/ؤ/g,"و").replace(/ئ/g,"ي")
+    .replace(/[^\u0621-\u064Aa-z0-9\s]/g," ").replace(/\s+/g," ").trim();
+}
+KB.forEach(c=>{c.nkw=[...new Set(c.kw.map(norm).filter(Boolean))];});
+
+function score(q,c){
+  let s=0;
+  for(const k of c.nkw){
+    if(q.includes(k)){
+      s += k.includes(" ") ? 2+k.split(" ").length : 1+Math.min(k.length,8)/8;
+    }
+  }
+  return s;
+}
+function search(q){
+  const nq=norm(q);
+  const r=KB.map(c=>({c,s:score(nq,c)})).filter(x=>x.s>0).sort((a,b)=>b.s-a.s);
+  if(!r.length||r[0].s<2) return [];
+  const top=r[0].s;
+  return r.filter((x,i)=>i<3 && x.s>=top*0.65 && x.s>=2).map(x=>x.c);
+}
+
+/* ============ واجهة المحادثة ============ */
+const chat=document.getElementById("chat"), inp=document.getElementById("inp"),
+      form=document.getElementById("form");
+let studentName=null, lastChunks=[];
+try{studentName=sessionStorage.getItem("gname");}catch(e){}
+
+function addUser(t){
+  const d=document.createElement("div");d.className="msg user";d.textContent=t;chat.appendChild(d);scroll();
+}
+function scroll(){chat.scrollTop=chat.scrollHeight;}
+function plain(html){
+  const t=document.createElement("div");
+  t.innerHTML=html.replace(/<\/(li|p|div)>/g,". </$1>").replace(/<br>/g,". ");
+  return t.textContent.replace(/\s+/g," ").trim();
+}
+function addBot(html,vids,opts={}){
+  const d=document.createElement("div");d.className="msg bot";
+  const body=document.createElement("div");body.innerHTML=html;d.appendChild(body);
+  const speech=plain(html);
+  if(vids&&vids.length){
+    const box=document.createElement("div");box.className="vids";
+    vids.forEach(v=>{
+      const w=document.createElement("div");w.className="vid";
+      const a=document.createElement("a");a.className="vl";a.href="https://youtu.be/"+v.id;a.textContent="▶ شاهد الفيديو هنا: "+v.t;
+      const ext=document.createElement("a");ext.className="ext";ext.href="https://youtu.be/"+v.id;ext.target="_blank";ext.rel="noopener";ext.textContent="(فتح في نافذة جديدة)";
+      const url=document.createElement("span");url.className="url";url.textContent="https://youtu.be/"+v.id;
+      let fr=null;
+      a.addEventListener("click",e=>{
+        e.preventDefault();
+        if(fr){fr.remove();fr=null;return;}
+        fr=document.createElement("iframe");
+        fr.src="https://www.youtube-nocookie.com/embed/"+v.id+"?rel=0";
+        fr.allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen";
+        fr.allowFullscreen=true;fr.loading="lazy";
+        w.appendChild(fr);setTimeout(scroll,100);
+      });
+      w.append(a,ext,url);box.appendChild(w);
+    });
+    d.appendChild(box);
+  }
+  const sp=document.createElement("button");sp.type="button";sp.className="spk";sp.textContent="🔊 استمع";
+  sp.onclick=()=>speak(speech);d.appendChild(sp);
+  chat.appendChild(d);scroll();
+  if(document.getElementById("auto").checked && !opts.noAuto) speak(speech);
+}
+function typing(){
+  const d=document.createElement("div");d.className="msg bot typing";d.textContent="يكتب...";chat.appendChild(d);scroll();return d;
+}
+
+function sendName(name){
+  try{
+    const p=new URLSearchParams();
+    p.append("name",name);p.append("الاسم",name);
+    p.append("timestamp",new Date().toLocaleString("ar-EG"));
+    fetch(SHEET_URL,{method:"POST",mode:"no-cors",body:p});
+  }catch(e){}
+}
+
+function welcome(){
+  addBot(`مرحبًا بك! 👋<br><b>للبدء : اكتب اسمك ثلاثي</b> في مربع الكتابة بالأسفل.`,null,{noAuto:true});
+}
+function afterName(){
+  inp.placeholder="اكتب سؤالك هنا...";
+}
+
+function handle(text){
+  const t=text.trim();if(!t)return;
+  addUser(t);inp.value="";
+  if(!studentName){
+    const words=t.split(/\s+/).filter(w=>/[A-Za-z\u0600-\u06FF]{2,}/.test(w));
+    if(words.length<3){
+      addBot(`من فضلك اكتب اسمك <b>ثلاثيًا</b> (ثلاث كلمات على الأقل) للبدء. 📝`,null,{noAuto:true});return;
+    }
+    studentName=t;try{sessionStorage.setItem("gname",t);}catch(e){}
+    sendName(t);afterName();
+    addBot(`أهلًا بك يا <b>${words[0]}</b>! تم تسجيل اسمك ✅<br>اكتب سؤالك الآن عن منصة Gamma، وسأجيبك من المادة التعليمية مع الفيديوهات التوضيحية.`);
+    return;
+  }
+  const nq=norm(t);
+  const ty=typing();
+  setTimeout(()=>{
+    ty.remove();
+    if(/^(مرحبا|اهلا|السلام|هاي|هلا|صباح|مساء|hello|hi)\b/.test(nq)&&nq.split(" ").length<4){
+      addBot(`أهلًا بك! 😊 اسألني عن أي خطوة في منصة Gamma.`);return;
+    }
+    if(/(شكرا|شكر|thanks|thank)/.test(nq)&&nq.split(" ").length<5){
+      addBot(`العفو! 🌟 يسعدني مساعدتك. اسألني متى شئت.`);return;
+    }
+    if(/(ابسط|ببساطه|بسط|مش فاهم|لم افهم|ما فهمت|مفهمتش|وضح اكثر|اشرح تاني|اعد الشرح|بطريقه ابسط)/.test(nq) && lastChunks.length){
+      lastChunks.forEach(c=>addBot(`<b>بشكل مبسّط:</b> ${c.simple||c.html}`,c.vids));
+      return;
+    }
+    const res=search(t);
+    if(!res.length){
+      addBot(`عذرًا، لم أجد إجابة عن هذا السؤال في المادة التعليمية المرفوعة. 📚<br>يمكنني مساعدتك في: التعريف بمنصة Gamma ومميزاتها، إنشاء الحساب، إنشاء العرض (من موضوع أو ملف)، مراجعة المخطط، تعديل النص والصور والتخطيط، إضافة الشرائح والجداول والفيديو، التعديل بالذكاء الاصطناعي، مشاهدة العرض ومشاركته وتصديره. جرّب إعادة صياغة سؤالك.`);
+      return;
+    }
+    lastChunks=res;
+    res.forEach(c=>addBot(c.html,c.vids));
+  },450);
+}
+
+form.addEventListener("submit",e=>{e.preventDefault();handle(inp.value);});
+document.getElementById("clr").addEventListener("click",()=>{
+  stopSpeech();chat.innerHTML="";lastChunks=[];
+  if(studentName){addBot(`تم مسح المحادثة. اكتب سؤالك الآن. 😊`,null,{noAuto:true});}else welcome();
+});
+
+/* ============ الصوت (قراءة عربية + إنجليزية بنطق صحيح) ============ */
+const synth=window.speechSynthesis;
+let voices=[];
+function loadVoices(){voices=synth?synth.getVoices():[];}
+if(synth){loadVoices();synth.onvoiceschanged=loadVoices;}
+
+const FEM=/hoda|zariyah|salma|laila|layla|fatima|noura|maryam|amina|hanan|zira|aria|jenny|emma|michelle|sara|samantha|susan|hazel|libby|sonia|natasha|karen|female|woman|zeina|mariam|shakira/i;
+const MALE=/naayf|hamed|shakir|maged|majed|tarik|fahed|salem|david|mark|guy|davis|christopher|eric|roger|ryan|george|james|daniel|alex|male|man\b|ismael/i;
+
+function pickVoice(lang,gender){
+  const list=voices.filter(v=>v.lang.toLowerCase().startsWith(lang));
+  if(!list.length) return null;
+  let best=null,bs=-1;
+  for(const v of list){
+    let s=0;
+    if(/natural|online|neural/i.test(v.name)) s+=6;
+    if(/microsoft/i.test(v.name)) s+=2;
+    if(/google/i.test(v.name)) s+=1;
+    if(lang==="ar" && /ar-eg|ar-sa/i.test(v.lang)) s+=1;
+    if(lang==="en" && /en-us/i.test(v.lang)) s+=1;
+    const isF=FEM.test(v.name), isM=MALE.test(v.name);
+    if(gender==="f"){ if(isF) s+=4; if(isM) s-=4; }
+    else { if(isM) s+=4; if(isF) s-=4; }
+    if(s>bs){bs=s;best=v;}
+  }
+  return best;
+}
+
+function cleanForSpeech(t){
+  return t
+    .replace(/https?:\/\/\S+/g," ")
+    .replace(/[\u{1F000}-\u{1FFFF}\u{2600}-\u{27BF}\u{FE0F}\u{200D}]/gu," ")
+    .replace(/[*_#`>•▶⋯\[\]()←→]/g," ")
+    .replace(/[:：]\s*\./g,".")
+    .replace(/\s+/g," ").trim();
+}
+
+function segments(text){
+  const parts=text.split(/([A-Za-z][A-Za-z0-9'’\-\.]*(?:\s+[A-Za-z][A-Za-z0-9'’\-\.]*)*)/);
+  const segs=[];
+  for(const p of parts){
+    if(!p||!p.trim()) continue;
+    const isEn=/^[A-Za-z]/.test(p.trim());
+    const hasLetters=/[A-Za-z\u0600-\u06FF0-9]/.test(p);
+    if(!hasLetters && segs.length){segs[segs.length-1].t+=" "+p;continue;}
+    segs.push({lang:isEn?"en":"ar",t:p.trim()});
+  }
+  const out=[];
+  for(const s of segs){
+    const pieces=s.t.match(/[^.!؟?\n،,:؛;]+[.!؟?\n،,:؛;]*/g)||[s.t];
+    let buf="";
+    for(const pc of pieces){
+      if((buf+pc).length>170 && buf){out.push({lang:s.lang,t:buf});buf=pc;}
+      else buf+=pc;
+    }
+    if(buf.trim()) out.push({lang:s.lang,t:buf});
+  }
+  return out;
+}
+
+function stopSpeech(){try{synth&&synth.cancel();}catch(e){}}
+function speak(text){
+  if(!synth){alert("المتصفح لا يدعم القراءة الصوتية.");return;}
+  stopSpeech();
+  if(!voices.length) loadVoices();
+  const gender=document.getElementById("gender").value;
+  const rate=parseFloat(document.getElementById("rate").value);
+  const vAr=pickVoice("ar",gender), vEn=pickVoice("en",gender);
+  const segs=segments(cleanForSpeech(text));
+  setTimeout(()=>{
+    segs.forEach(s=>{
+      const u=new SpeechSynthesisUtterance(s.t);
+      const v=s.lang==="ar"?vAr:vEn;
+      if(v){u.voice=v;u.lang=v.lang;}else u.lang=s.lang==="ar"?"ar-SA":"en-US";
+      u.rate=s.lang==="en"?Math.min(rate+0.03,1.3):rate;
+      u.pitch=gender==="f"?1.05:0.95;
+      u.volume=1;
+      synth.speak(u);
+    });
+  },80);
+}
+window.addEventListener("beforeunload",stopSpeech);
+
+try{
+  const a=localStorage.getItem("g_auto"),g=localStorage.getItem("g_gender"),r=localStorage.getItem("g_rate");
+  if(a==="1")document.getElementById("auto").checked=true;
+  if(g)document.getElementById("gender").value=g;
+  if(r)document.getElementById("rate").value=r;
+}catch(e){}
+["auto","gender","rate"].forEach(id=>document.getElementById(id).addEventListener("change",()=>{
+  try{
+    localStorage.setItem("g_auto",document.getElementById("auto").checked?"1":"0");
+    localStorage.setItem("g_gender",document.getElementById("gender").value);
+    localStorage.setItem("g_rate",document.getElementById("rate").value);
+  }catch(e){}
+}));
+
+/* بدء */
+if(studentName){afterName();addBot(`أهلًا بعودتك! 👋 اكتب سؤالك الآن.`,null,{noAuto:true});}
+else welcome();
+</script>
+</body>
+</html>
