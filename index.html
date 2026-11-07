@@ -186,6 +186,7 @@ ul.check>li::before{content:"✔"; color:var(--ok); margin-inline-end:8px; font-
 
   <div class="voicebar" id="voicebar" role="group" aria-label="إعدادات الصوت">
     <button type="button" class="vb-clear" id="clearChat">مسح المحادثة</button>
+    <button type="button" class="vb-clear" id="changeName">تغيير الاسم</button>
     <label class="pill"><select id="vOn" aria-label="الصوت">
       <option value="on">🔊 الصوت: تشغيل</option>
       <option value="off">🔇 الصوت: كتم</option>
@@ -828,6 +829,11 @@ function applyVoice(){
   if(!TTS.state.enabled) stopSpeaking();
 }
 [vOn,vSpeed,vGender,vAuto].forEach(x=>x.addEventListener('change',applyVoice)); applyVoice();
+$('#changeName').addEventListener('click',()=>{
+  stopSpeaking(); try{localStorage.removeItem('g_name')}catch(e){}
+  chat.innerHTML=''; S.last=[]; S.name=''; $('#nameInput').value=''; $('#nameErr').textContent='';
+  $('#nameOverlay').classList.add('show'); setTimeout(()=>$('#nameInput').focus(),100);
+});
 $('#clearChat').addEventListener('click',()=>{ stopSpeaking(); chat.innerHTML=''; S.last=[]; welcome(true); });
 $('#listenNotes').addEventListener('click',e=>{
   TTS.unlock(); const b=e.currentTarget; if(b.dataset.on==='1'){ stopSpeaking(); b.dataset.on='0'; b.textContent='🔊 استمع للملاحظات'; return; }
@@ -881,12 +887,12 @@ $('#nameForm').addEventListener('submit',async e=>{
   if(!validName(name)){ err.textContent='من فضلك اكتب اسمك ثلاثي (ثلاث كلمات على الأقل).'; inp.focus(); return; }
   err.textContent=''; go.disabled=true; go.textContent='جارٍ التسجيل…';
   await registerName(name);
-  store.sset('g_name',name); go.disabled=false; go.textContent='ابدأ';
+  store.set('g_name',name); go.disabled=false; go.textContent='ابدأ';
   enterChat(name);
 });
 (function init(){
   flushPending();
-  const saved=store.sget('g_name');
+  const saved=store.get('g_name','');
   if(saved) enterChat(saved); else setTimeout(()=>$('#nameInput').focus(),100);
 })();
 </script>
